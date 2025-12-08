@@ -1,0 +1,49 @@
+git与github的使用说明
+
+  首先需要开发者在自己的电脑上安装git，用来对自己的代码进行管理。
+  开发完成之后，通过git把代码push到github上进行托管。
+  当需要修改代码时，可以通过git从github上先把代码pull下来，然后再进行开发。
+  这种运行模式是允许多人协作同时开发同一个项目。
+
+git安装命令
+apt-get install git
+
+之后需要配置自己的用户名和个人电子邮件地址
+git config --global user.name ""
+git config --global user.email xxxxx.com
+
+当配置成功时，可以使用以下命令对配置信息进行查看
+git config --list
+
+可以在终端使用以下命令，确保自己的git已正确安装并配置
+git --version
+git config --list
+
+在这个基础上，我们要将git与github关联起来，也就是可以让git通过网络从github上
+pull与push代码，通常通信主要有两种方式：也就是http与ssh，我们这里将介绍的是ssh
+
+我们首先开始创建版本库，首先到一个空目录下，执行以下命令：
+mkdir learngit
+cd learngit
+pwd
+
+第二步，通过git init命令把这个目录变成git可以管理的仓库
+git init
+(使用ls -ah可以看见隐藏目录)
+
+好的，我们现在可以试着编写一个readme.txt文件，内容如下：
+Git is a version control system.
+Git is free software.
+
+现在我们要把这个文件提交到git仓库中就需要两步：
+第一步，告诉git，将文件添加到仓库
+git add .
+或者
+git add readme.txt
+
+第二步：告诉git，把文件提交到仓库
+git commit -m "wrote a readme file"
+
+
+
+
