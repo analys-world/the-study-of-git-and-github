@@ -1,0 +1,128 @@
+git与github的使用说明
+
+  首先需要开发者在自己的电脑上安装git，用来对自己的代码进行管理。
+  开发完成之后，通过git把代码push到github上进行托管。
+  当需要修改代码时，可以通过git从github上先把代码pull下来，然后再进行开发。
+  这种运行模式是允许多人协作同时开发同一个项目。
+
+git安装命令
+sudo apt-get install git
+
+之后需要配置自己的用户名和个人电子邮件地址
+git config --global user.name ""
+git config --global user.email xxxxx.com
+
+当配置成功时，可以使用以下命令对配置信息进行查看
+git config --list
+
+可以在终端使用以下命令，确保自己的git已正确安装并配置
+git --version
+git config --list
+
+在这个基础上，我们要将git与github关联起来，也就是可以让git通过网络从github上
+pull与push代码，通常通信主要有两种方式：也就是http与ssh，我们这里将介绍的是ssh
+
+
+  一 创建版本库
+
+我们首先开始创建版本库，首先到一个空目录下，执行以下命令：
+mkdir learngit
+cd learngit
+pwd
+
+第二步，通过git init命令把这个目录变成git可以管理的仓库
+git init
+(使用ls -ah可以看见隐藏目录)
+
+好的，我们现在可以试着编写一个readme.txt文件，内容如下：
+Git is a version control system.
+Git is free software.
+
+现在我们要把这个文件提交到git仓库中就需要两步：
+第一步，告诉git，将文件添加到仓库
+git add .
+或者
+git add readme.txt
+
+第二步：告诉git，把文件提交到仓库
+git commit -m "wrote a readme file"
+
+
+
+
+  二 版本回退
+好的，现在我们已经成功的添加并提交了一个readme.txt文件
+我们可以使用以下命令查看仓库当前的状态：
+git statue
+
+也可以使用以下命令查看上一次修改的内容：
+git diff
+
+在实际工作中，我们可以通过以下命令告诉我们的历史记录：
+git log
+
+当我们想要退回上个版本时，我们可以使用以下命令：
+git reset --hard HEAD^
+可以在后面加上数字来自己手动控制想要回退的实际版本：
+git reset --hard HEAD^(number)
+
+当然，git也提供了命令来记录你的每一次命令：
+git reflog
+
+
+
+
+    三 工作区与暂存区
+
+工作区：working directory
+
+版本库：repository
+工作区有一个隐藏目录.git ，这个不算工作区，而是git的版本库。
+git的版本库里存了很多东西，其中最重要的就是stage(或者叫index)的暂存区，还有git为我们自动
+创建的第一个分支master(目前在github上创建新的存储库时，主分支一般叫main),以及一个指向master
+的指针叫HEAD
+
+前面我们在把文件往git版本库里添加时，是分为两步执行的：
+第一步使用git将文件添加进去，实际就是把文件修改添加到暂存区；
+第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。
+
+因为我们在创建git版本库时，git自动为我们创建了一个master分支，而使用git commit就是往
+master分支上提交修改
+
+当你改乱了工作区的某个文件时，想直接丢弃工作区的修改时，可以使用以下命令
+git checkout -- file
+
+
+
+  六 添加远程库
+
+从现在起，只要本地作了提交，就可以通过以下命令：
+git push origin master
+把本地的master分支的最新修改推送到github，也就是说，从现在起
+就拥有了一个真正的分布式版本库。
+
+删除远程库：如果添加的时候地址写错了，或者是想删除远程库，
+可以使用以下命令：
+git remote rm <name>
+当然，使用前，建议先用以下命令查看远程库信息：
+git remote -v
+
+然后，根据名字删除，比如删除origin:
+git remote origin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
